@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'RecipeScreen.dart';
 
 class RecipeService {
-  static const String geminiApiKey = "Your API KEY";
+  static const String geminiApiKey = "AIzaSyC7ofHrIq8vePUBb7ExI5GgzHM7qXdf3Zw";
   static const String geminiUrl =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$geminiApiKey";
 
