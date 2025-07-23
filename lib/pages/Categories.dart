@@ -30,7 +30,7 @@ class _CategoryRecipeScreenState extends State<CategoryRecipeScreen> {
     final List<String> suggestions =
         await RecipeService.getRecipeSuggestionsByCategoryAndPreference(
       category: widget.category,
-      preference: dietary,
+  
     );
 
     if (suggestions.isNotEmpty) {
