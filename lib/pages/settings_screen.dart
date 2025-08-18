@@ -132,6 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
         backgroundColor: _isDarkMode ? Colors.grey[900] : Colors.grey[200],
+        foregroundColor: _isDarkMode ? Colors.white : Colors.black,
       ),
       backgroundColor: backgroundColor,
       body: ListView(

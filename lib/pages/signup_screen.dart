@@ -108,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _confirmPasswordController,
                     hintText: "Confirm Password",
                     isPasswordField: true,
+                    onFieldSubmitted: (_) => _signUp(),
                   ),
                   const SizedBox(height: 20),
                   GestureDetector(

@@ -4,7 +4,7 @@ import 'saved_recipes_screen.dart';
 import 'grocery_list_screen.dart';
 import 'profile_screen.dart';
 import 'settings_screen.dart';
-import 'IngredientSearchScreen.dart'; // ⬅ new import
+import 'IngredientSearchScreen.dart'; 
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
