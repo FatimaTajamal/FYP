@@ -8,6 +8,7 @@ import 'signup_screen.dart';
 import '../services/firebase_auth_service.dart';
 import '../widgets/form_container_widget.dart';
 import '../global/toast.dart';
+import 'forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -210,6 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       return null;
                     },
+                      onFieldSubmitted: (_) => _signIn(),
                   ),
                   CheckboxListTile(
                     value: _keepLoggedIn,
@@ -226,14 +228,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: _isLoading ? null : _resetPassword,
-                      child: const Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                     onPressed: _isLoading
+      ? null
+      : () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const ForgotPasswordScreen(),
+            ),
+          );
+        },
+        child: const Text(
+          'Forgot Password?',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            ),
+            ),
                     ),
                   ),
                   const SizedBox(height: 30),

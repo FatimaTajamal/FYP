@@ -205,23 +205,38 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+try {
+User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-    setState(() {
-      _isSigningUp = false;
-    });
+// Always get the current signed-in user (sometimes _auth wrapper may not return it correctly)
+User? currentUser = FirebaseAuth.instance.currentUser;
 
-    if (user != null) {
-      showToast(message: "Account created successfully!");
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MainScreen(),
-        ), // ✅ Goes to MainScreen after signup
-        (route) => false,
-      );
-    } else {
-      showToast(message: "Signup failed. Try again.");
-    }
+if (currentUser != null) {
+  await currentUser.sendEmailVerification();
+  print("Verification email sent to: ${currentUser.email}");
+
+    showToast(
+      message:
+          "Account created! Please check your email to verify your account.",
+    );
+
+    // Go to LoginScreen (don’t auto-login until verified)
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (route) => false,
+    );
+  } else {
+    showToast(message: "Signup failed. Try again.");
+  }
+} on FirebaseAuthException catch (e) {
+  showToast(message: e.message ?? "Signup failed.");
+} catch (e) {
+  showToast(message: "An unexpected error occurred. Please try again.");
+} finally {
+  setState(() {
+    _isSigningUp = false;
+  });
+}
   }
 }
